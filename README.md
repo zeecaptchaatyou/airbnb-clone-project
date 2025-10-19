@@ -1,209 +1,163 @@
-# airbnb-clone-project
-AirBnB Server-Side Logic Clone
 
+🏠 AirBnB Clone Project
 
-🏠 AirBnB Clone - The Console
-📄 Project Overview
-The AirBnB Clone project is the foundation of a full web application that mimics the functionality of the real Airbnb platform.
- It’s designed to teach and demonstrate full-stack web development principles — starting from backend logic to frontend integration.
-In this project, we begin by building a command-line interpreter (console) to manage the application's data models.
- This includes creating, retrieving, updating, and deleting data (objects) related to users, places, cities, and more.
- Later stages of the project will expand this base into a RESTful API, a dynamic web interface, and finally a complete deployment-ready system.
-The AirBnB Clone demonstrates essential backend skills such as object-oriented programming (OOP), serialization/deserialization, file storage, database integration, and API development.
+**Team Roles**
+Team Member
+Role/Responsibility
+Zainab Jummah
+Project Lead, Backend Developer
+Each member of the team plays a unique role in ensuring smooth development and deployment of the project — from user interface creation to server logic, data persistence, and continuous integration.
 
-🎯 Description of the Command Interpreter
-The command interpreter (or console) is the starting point of the project.
- It serves as a backend management tool for manipulating data without using a visual interface.
-It allows users to:
-Create new objects (e.g., User, Place, City, Review)
-
-
-Retrieve objects from storage
-
-
-Perform updates on existing objects
-
-
-Delete objects when no longer needed
-
-
-Persist data between sessions using file storage (JSON)
-
-
-The console acts as the bridge between the developer and the application’s backend — similar to how Django or Flask shells interact with databases.
-🔧 How It Works:
-The console is built using Python’s cmd module`, which enables the creation of command-line programs.
-
-
-Data persistence is achieved through a JSON-based storage engine (FileStorage).
-
-
-Each model (User, State, Place, etc.) inherits from a common BaseModel, which manages unique IDs and timestamps.
-
-
-Example usage:
-(hbnb) create User
-(hbnb) show User 1234-5678-9101
-(hbnb) update User 1234-5678-9101 email "zee@alxafrica.com"
-(hbnb) destroy User 1234-5678-9101
-
-
-🧱 Command Interpreter Usage
-🔹 How to Start It
-Run the executable Python file:
-$ ./console.py
-
-🔹 How to Use It (Interactive Mode)
-$ ./console.py
-(hbnb) help
-Documented commands (type help <topic>):
-========================================
-EOF  all  count  create  destroy  help  quit  show  update
-(hbnb)
-(hbnb) quit
-$
-
-🔹 How to Use It (Non-Interactive Mode)
-You can also run commands directly:
-$ echo "create User" | ./console.py
-$ echo "show User 1234-5678" | ./console.py
-
-
-🧩 Environment Setup
-Requirements:
-Ubuntu 20.04 LTS
-
-
-Python 3.8.5
-
-
-pycodestyle for linting
-
-
-Git for version control
-
-
-Installation:
-$ git clone https://github.com/<your-github-username>/AirBnB_clone.git
-$ cd AirBnB_clone
-$ ./console.py
-
-
-🧠 Project Structure
-AirBnB_clone/
-│
-├── models/
-│   ├── base_model.py
-│   ├── user.py
-│   ├── state.py
-│   ├── city.py
-│   ├── place.py
-│   ├── amenity.py
-│   ├── review.py
-│   └── __init__.py
-│
-├── tests/
-│   ├── test_models/
-│   │   └── test_base_model.py
-│   └── test_console.py
-│
-├── console.py
-├── models/engine/
-│   ├── file_storage.py
-│   └── __init__.py
-│
-├── README.md
-└── AUTHORS
-
-
-🧰 Classes and Methods
-Class
-Description
-BaseModel
-Defines common attributes/methods for all models
-User
-Handles user information (email, password, etc.)
-State
-Defines states within the system
-City
-Defines cities associated with states
-Place
-Represents accommodation listings
-Review
-Stores user feedback about a place
-Amenity
-Lists features of a place (WiFi, pool, etc.)
-
-
-⚙️ Storage Engine
-🔸 FileStorage
-The FileStorage engine serializes instances to a JSON file (file.json) and deserializes JSON back into object instances.
- It serves as the project’s database in early stages.
-Functions include:
-all() → returns a dictionary of all stored objects
-
-
-new(obj) → adds a new object
-
-
-save() → writes objects to file
-
-
-reload() → loads objects from file
-
-
-Later stages of the project may introduce DBStorage (SQL-based).
-
-🧪 Testing
-Unit tests ensure that every class, method, and feature works as intended.
- Tests are written using Python’s built-in unittest module.
-To run all tests:
-$ python3 -m unittest discover tests
-
-
-🧱 Technologies Used
+**Technology Stack**
+The AirBnB Clone Project  leverages a robust and scalable technology stack to ensure reliability, maintainability, and performance across all components of the system.
+Category
 Technology
 Purpose
-Python 3.8.5
-Core language used
-cmd module
-Console command framework
-JSON
-File-based data storage
-unittest
-Automated testing
+Programming Language
+Python 3.8+
+Core backend language
+Web Framework
+Flask
+RESTful API development and routing
+Frontend
+HTML5, CSS3, JavaScript
+Client-side rendering and interactivity
+Database
+MySQL / SQLAlchemy
+Persistent data storage and ORM
+Version Control
 Git & GitHub
-Version control and collaboration
-pycodestyle (PEP8)
-Code formatting standard
+Source code management and collaboration
+Testing
+Unittest / Pytest
+Automated testing framework
+Deployment
+Render / Railway / Docker
+Application hosting and containerization
+CI/CD
+GitHub Actions
+Automated testing and deployment pipeline
+Security
+JWT / HTTPS / Flask-Login
+Authentication, authorization, and secure communication
+
+This stack provides flexibility and modularity, ensuring the system can evolve easily while maintaining code quality and efficiency.
+
+**Database Design**
+The database architecture follows a relational model to handle relationships between users, properties, reviews, and locations efficiently.
+🧱 Entity Relationship Model (ERM)
+The system consists of the following key entities:
+Entity
+Attributes
+Relationships
+User
+id, name, email, password
+1-to-many with Place, 1-to-many with Review
+Place
+id, name, description, city_id, user_id
+many-to-1 with City, many-to-1 with User
+City
+id, name, state_id
+1-to-many with Place
+State
+id, name
+1-to-many with City
+Review
+id, text, user_id, place_id
+many-to-1 with User, many-to-1 with Place
+Amenity
+id, name
+many-to-many with Place
+
+The database supports two storage modes:
+FileStorage (JSON) — used for development and local testing.
 
 
-🌍 Deployment
-While the console is locally run, future phases of the project will involve:
-Creating REST APIs with Flask
-
-
-Storing data in MySQL/PostgreSQL
-
-
-Deploying with Gunicorn, Nginx, or Render
-
-
-Integrating the backend with a responsive HTML/CSS/JS frontend
+DBStorage (MySQL) — used for production environments.
 
 
 
-👨‍💻 Authors
-This project was completed as part of the ALX Software Engineering Programme.
-Contributors:
-Zee [zeecaptcha]
+Feature Breakdown
+The project implements a modular architecture where each component focuses on a specific function of the Airbnb system.
+Feature
+Description
+User Management
+Registration, login, logout, and profile editing
+Property Management
+Add, update, or delete listings (Places)
+Search & Filtering
+Filter properties by location, amenities, and price
+Booking System
+Reserve and manage accommodation dates
+Review System
+Users can review and rate their stays
+Admin Dashboard
+Manage users, properties, and reports
+API Endpoints
+RESTful API for frontend and external integrations
+
+Each feature is implemented with scalability and security in mind, following RESTful conventions and adhering to ALX software design standards.
+
+API Security
+Security is a top priority in the AirBnB Clone Project. The following measures ensure data integrity and safe interactions between clients and servers:
+Authentication: Implemented using JWT tokens and Flask-Login for session management.
 
 
+Authorization: Role-based access control to restrict actions to specific users.
 
-🏁 License
-This project is part of the ALX curriculum and is distributed under the MIT License.
- See the LICENSE file for details.
 
-💬 Acknowledgments
-Special thanks to the ALX Africa team, mentors, and peers for providing guidance, code reviews, and support throughout the project.
+Data Encryption: Sensitive user data (passwords) hashed using bcrypt.
+
+
+HTTPS Protocol: All communications secured using SSL certificates.
+
+
+Input Validation: Prevents SQL Injection and XSS attacks.
+
+
+CORS Configuration: Restricts access to trusted domains only.
+
+
+Example of protected route in Flask:
+@app.route('/api/v1/users', methods=['GET'])
+@jwt_required()
+def get_users():
+    current_user = get_jwt_identity()
+    return jsonify({"user": current_user}), 200
+
+
+CI/CD Pipeline
+The Continuous Integration and Continuous Deployment (CI/CD) pipeline automates code testing, building, and deployment.
+⚙️ Tools Used:
+GitHub Actions: Automates testing and deployment.
+
+
+Docker: Containerizes the app for consistency across environments.
+
+
+Render / Railway: Deploys the containerized application.
+
+
+pytest & flake8: Run automatically on every push or pull request.
+
+
+🧩 Workflow:
+Code Commit: Developers push code to the main branch.
+
+
+Automated Testing: Unit tests and style checks run automatically.
+
+
+Build Stage: Docker builds the application image.
+
+
+Deployment: If tests pass, deployment occurs automatically to staging or production servers.
+
+
+Notifications: Developers receive CI/CD status via GitHub notifications.
+
+
+This ensures code quality, eliminates manual deployment errors, and maintains a continuous integration process for a stable production environment.
+
+
 
